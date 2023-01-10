@@ -2,10 +2,13 @@ const User = require("./userSchema");
 const crypt = require("../../utils/crypt");
 const createToken = require("../../utils/createToken");
 
+const createSvg=require('../../utils/createSvg')
+
 class UserService {
   constructor() {}
 
   static async login(ctx) {
+   
     const { username, password } = ctx.request.body;
     let result = await User.findOne({ username: username });
     if (result) {
@@ -24,7 +27,7 @@ class UserService {
     const { username, password } = ctx.request.body;
 
     let res = await User.findOne({ username: username });
-
+    // 每次查询后都需要判断后读取res
     if (res) {
       if (res.username === username) {
         console.log(res.name);
@@ -45,6 +48,14 @@ class UserService {
 
   static async test(ctx) {
     ctx.body = "这是一个带有认证的token test接口";
+  }
+  static async getSvgCap(ctx){
+    let { text, data } = createSvg();
+
+    ctx.type = 'image/svg+xml';
+    ctx.body = data;
+    ctx.session.captcha = text;
+    console.log(ctx.session);
   }
 }
 
