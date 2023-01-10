@@ -1,7 +1,9 @@
 const articlesRouter=require('koa-router')()
+const articleService=require('./articleService')
 
-articlesRouter.get('/',(ctx)=>{
-  ctx.body="article123"
-})
+
+
+articlesRouter.post('/createArticle',articleService.createArticle)
+articlesRouter.get('/test',articleService.test)
 
 module.exports=articlesRouter

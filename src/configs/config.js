@@ -10,7 +10,7 @@ let config = {
   jwt: {
     secret: "galaxy",
     // expiresIn: 60 * 60, //以秒为单位
-    expiresIn: 60,
+    expiresIn: 60 * 60,
   },
   sessionOption: {
     key: "galaxy" /** (string) cookie key (default is koa.sess) */,

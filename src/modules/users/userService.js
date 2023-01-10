@@ -39,7 +39,7 @@ class UserService {
         username: username,
         password: crypt.encrypt(password),
       });
-      let result = registerInfo.save();
+      let result =await registerInfo.save();
       if (result) {
         ctx.success("注册成功", result);
       }
