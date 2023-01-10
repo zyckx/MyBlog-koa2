@@ -22,13 +22,24 @@ class UserService {
 
   static async register(ctx) {
     const { username, password } = ctx.request.body;
-    let registerInfo = new User({
-      username: username,
-      password: crypt.encrypt(password),
-    });
-    const result = await registerInfo.save();
-    if (result) {
-      ctx.success("注册成功", result);
+
+    let res = await User.findOne({ username: username });
+
+    if (res) {
+      if (res.username === username) {
+        console.log(res.name);
+        ctx.fail("用户名已经存在", -1);
+      } else {
+      }
+    } else {
+      let registerInfo = new User({
+        username: username,
+        password: crypt.encrypt(password),
+      });
+      let result = registerInfo.save();
+      if (result) {
+        ctx.success("注册成功", result);
+      }
     }
   }
 

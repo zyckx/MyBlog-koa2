@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
 
     username: {
-        type: mongoose.Schema.Types.String,
+        type: String,
         set(val) {
             return val.replace(/\s*/g, "");
             /*str.replace(/\s*!/g,""); //去除字符串内所有的空格
