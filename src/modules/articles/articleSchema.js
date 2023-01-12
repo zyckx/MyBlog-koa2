@@ -21,7 +21,7 @@ const articleSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    tags: { type: String }, //type为tag文档的id
+    tags: { type: Schema.Types.ObjectId,ref:'tags'}, //type为tag文档的id
 });
 //必须先set后get
 articleSchema.set("toJSON", { getters: true, virtuals: true });
