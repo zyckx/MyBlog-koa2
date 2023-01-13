@@ -24,7 +24,6 @@ class UserService {
 
 	static async register(ctx) {
 		const { username, password } = ctx.request.body;
-
 		let res = await User.findOne({ username: username });
 		// 每次查询后都需要判断后读取res
 		if (res) {

@@ -14,6 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
     "aedes": "^0.48.1",
     "aedes-persistence-mongodb": "^9.1.1",
     "bcryptjs": "^2.4.3",
