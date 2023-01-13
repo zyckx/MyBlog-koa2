@@ -5,7 +5,10 @@
   "main": "src/app.js",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:create": "eslint --init",
+    "prepare": "husky install",
+    "lint": "eslint \"**/*.js\" --fix",
+    "prettier-format": "prettier --config .prettierrc.cjs \"src/**/*.{js,jsx,ts,tsx,css,scss,md}\" --write"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,8 @@
     "aedes": "^0.48.1",
     "aedes-persistence-mongodb": "^9.1.1",
     "bcryptjs": "^2.4.3",
+    "husky": "^8.0.3",
+    "i": "^0.3.7",
     "jsonwebtoken": "^9.0.0",
     "koa": "^2.14.1",
     "koa-bodyparser": "^4.3.0",
@@ -24,10 +29,26 @@
     "koa-session": "^6.3.1",
     "koa-static": "^5.0.0",
     "koa-views": "^8.0.0",
+    "lint-staged": "^13.1.0",
     "moment": "^2.29.4",
     "mongoose": "^6.8.3",
     "mqtt": "^4.3.7",
     "nodemon": "^2.0.20",
+    "npm": "^9.3.0",
     "svg-captcha": "^1.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,scss,md}": [
+      "npm run lint",
+      "npm run prettier-format"
+    ]
   }
 }

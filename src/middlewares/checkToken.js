@@ -1,7 +1,5 @@
-
-
 module.exports = async (ctx, next) => {
-  /*   let token = ctx.header.authorization;
+	/*   let token = ctx.header.authorization;
     const { time, timeout } = jwt.verify(token, config.jwt.secret);
     let { iat, exp } = ctx.state.user;
 
@@ -12,14 +10,14 @@ module.exports = async (ctx, next) => {
     console.log(ctx.response);
     console.log(time, timeout);
  */
-  await next().catch((err) => {
-    if (err.status === 401) {
-      ctx.fail(
-        err.originalError ? err.originalError.message : err.message,
-        err.status
-      );
-    } else {
-      throw err;
-    }
-  });
+	await next().catch(err => {
+		if (err.status === 401) {
+			ctx.fail(
+				err.originalError ? err.originalError.message : err.message,
+				err.status,
+			);
+		} else {
+			throw err;
+		}
+	});
 };
