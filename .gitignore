@@ -1,5 +1,68 @@
 node_modules/
+.DS_Store
 dist/
 .idea
 .gitgnore
 package-lock.json
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# idea-like project files
+*.iml
+/.idea
+/*/.idea
+/*/target
+/*/*.iml
+
+# pycharm project files
+/*/__pycache__
+**/__pycache__
+/venv
+/*_venv/
+/output
+/outside_src
+/build
+
+# logs
+/logs
+/*/logs
+# Compiled class file
+*.class
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Intellij
+*.ipr
+*.iml
+*.iws
+.idea/
+
+# Maven
+target/
+
+# Gradle
+build
+.gradle
+
+# Log file
+*.log
+log/
+
+# out
+**/out/
+
+# Mac
+.DS_Store
+
+# others
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+*.pid
+*.orig
+temp/
+
