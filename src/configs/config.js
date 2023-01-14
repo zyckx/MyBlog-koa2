@@ -42,6 +42,7 @@ let config = {
 		port: 27017,
 		user: '', //非必填
 		password: '', //非必填
+		sh: 'mongod -f /usr/local/mongodb-macos-x86_64-6.0.3/etc/mongodb.conf',
 	},
 	app: {
 		port: process.env.PORT || 3000,

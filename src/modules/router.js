@@ -3,7 +3,7 @@ const config = require('../configs/config');
 
 const usersRouter = require('./users/usersController');
 const articlesRouter = require('./articles/articleController');
-
+const fileRouter = require('./fileUpload/fileController');
 // 统一前缀
 router.prefix(config.app.routerBaseApi);
 
@@ -18,4 +18,5 @@ router.use(
 	articlesRouter.allowedMethods(),
 );
 
+router.use('/file', fileRouter.routes(), fileRouter.allowedMethods());
 module.exports = router;
