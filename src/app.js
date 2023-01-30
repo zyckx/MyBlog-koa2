@@ -8,10 +8,11 @@ const checkToken = require('./middlewares/checkToken');
 const checkSvg = require('./middlewares/checkSvg');
 const routerResponse = require('./middlewares/routerResponse');
 const config = require('./configs/config');
-
+const aedes = require('./mqtt/mqtt-server');
 const app = new koa();
 
 const connectDb = require('./db/connectDb');
+aedes(); //启动mqtt服务
 connectDb();
 
 app.use(logger());
