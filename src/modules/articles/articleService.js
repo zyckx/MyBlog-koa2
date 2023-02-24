@@ -1,5 +1,6 @@
 const Article = require('./articleSchema');
 const createAbstract = require('../../utils/getArticlesAbstract');
+
 class articleService {
 	constructor() {}
 
@@ -39,8 +40,8 @@ class articleService {
 			ctx.fail('发布文章失败', -1);
 		}
 	}
+
 	static async getArticle(ctx) {
-		// let { sort, page, size } = ctx.request.body;
 		let { sort, page, size } = ctx.request.query;
 		let res = await Article.aggregate([
 			{
@@ -57,9 +58,24 @@ class articleService {
 			{ $sort: { life: Number(sort) } }, ////1为正序，-1为逆序
 		]);
 		if (res) {
-			ctx.success('查询成功', res);
+			ctx.success('查找全部成功', res);
 		}
 	}
+	//获取全部文章
+	static async getAllArticles(ctx) {
+		let res = await Article.find({}).populate('tags').exec();
+		if (res) {
+			ctx.success('查找全部成功', res);
+		}
+	}
+	//获取单个文章
+	static async getOneArticle(ctx) {
+		let res = await Article.findById(ctx.query.id).populate('tags').exec();
+		if (res) {
+			ctx.success('查找成功', res);
+		}
+	}
+	//测试
 	static async test(ctx) {
 		let res = await Article.find({}).populate('tags').exec();
 		if (res) {

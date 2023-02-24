@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 let config = {
 	admin: {
 		username: 'admin',
@@ -35,6 +36,38 @@ let config = {
 		// mathMin: 1,
 		// mathMax: 30,
 		// mathOperator: "+",
+	},
+	uploadOption: {
+		multipart: true,
+		formidable: {
+			// 上传目录
+			uploadDir: path.join(__dirname, '../static/uploads'),
+			// 保留文件扩展名
+			keepExtensions: true,
+			// 文件大小
+			//maxFileSize: 200 * 1024 * 1024, // 设置上传文件大小最大限制，默认2M
+			onFileBegin: (name, file) => {
+				// 无论是多文件还是单文件上传都会重复调用此函数
+				// 上传文件保留文件原始名称
+				console.log('file', file);
+				const fileName = file.originalFilename;
+				const filePath = path.join(
+					__dirname,
+					'../static/uploads',
+					fileName,
+				);
+				// 判断文件是否存在，如果存在则删除
+				if (fs.existsSync(filePath)) {
+					// 删除文件
+					fs.unlinkSync(filePath);
+				}
+				file.filepath = filePath;
+				file.newFilename = fileName;
+			},
+		},
+		onError: (err, ctx) => {
+			ctx.fail('上传失败', 500);
+		},
 	},
 	mongodb: {
 		host: '127.0.0.1',

@@ -9,27 +9,13 @@ const checkSvg = require('./middlewares/checkSvg');
 const routerResponse = require('./middlewares/routerResponse');
 const config = require('./configs/config');
 
-const path = require('path');
 const app = new koa();
 
 const connectDb = require('./db/connectDb');
 connectDb();
 
 app.use(logger());
-app.use(
-	koaBody({
-		// 支持文件格式
-		multipart: true,
-		formidable: {
-			// 上传目录
-			uploadDir: path.join(__dirname, './static'),
-			// join和resolve的区别
-			// join是将多个路径拼接成一个路径，resolve是将多个路径解析成一个绝对路径
-			// 保留文件扩展名
-			keepExtensions: true,
-		},
-	}),
-);
+app.use(koaBody(config.uploadOption));
 
 app.keys = [config.sessionOption.key];
 
@@ -46,16 +32,16 @@ app.use(
 	koaJwt({ secret: config.jwt.secret }).unless({
 		// 设置login、register接口，可以不需要认证访问
 		path: [
-			/^\/api\/users\/login/,
-			/^\/api\/users\/login/,
+			/^\/*/,
+			/^\/api\/*\/*/,
 			/^\/api\/users\/register/,
-			/^\/api\/static\/uploads/,
-			/^((?!\/api).)*$/, // 设置除了私有接口外的其它资源，可以不需要认证访问
+			/^\/api\/articles\/getArticle/,
 		],
 	}),
 );
 
 const router = require('./modules/router');
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(config.app.port, () => {

@@ -37,7 +37,7 @@ fileSchema.set('toObject', { getters: true, virtuals: true });
 fileSchema.path('uploadTime').get(function (v) {
 	return moment(v).format('YYYY MMMM Do, h:mm:ss a');
 });
-fileSchema.path('url').get(function (v) {
+fileSchema.path('url').set(function (v) {
 	// 替换dirname
 	return v.replace(__dirname, '');
 });
